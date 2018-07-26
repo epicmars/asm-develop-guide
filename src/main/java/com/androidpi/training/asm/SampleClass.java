@@ -24,4 +24,13 @@ public class SampleClass extends SampleAbstractClass implements SampleInterface{
     public String aMethodOfSampleClass(String arg) {
         return String.format("return : %s", arg);
     }
+
+    public static class SampleInnerClass {
+
+        private String name;
+
+        public String innerMethod() {
+            return "Inner Method";
+        }
+    }
 }

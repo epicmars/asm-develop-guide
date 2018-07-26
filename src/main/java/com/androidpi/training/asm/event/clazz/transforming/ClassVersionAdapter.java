@@ -1,9 +1,14 @@
 package com.androidpi.training.asm.event.clazz.transforming;
 
 
+import com.androidpi.training.asm.SampleClass;
+import com.androidpi.training.asm.event.clazz.parsing.ClassPrinter;
+import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 
+import static org.objectweb.asm.Opcodes.ASM6;
 import static org.objectweb.asm.Opcodes.V1_8;
 
 public class ClassVersionAdapter extends ClassVisitor {
@@ -12,8 +17,8 @@ public class ClassVersionAdapter extends ClassVisitor {
         super(api);
     }
 
-    public ClassVersionAdapter(int api, ClassVisitor classVisitor) {
-        super(api, classVisitor);
+    public ClassVersionAdapter(ClassVisitor classVisitor) {
+        super(ASM6, classVisitor);
     }
 
     @Override
@@ -28,5 +33,11 @@ public class ClassVersionAdapter extends ClassVisitor {
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
         return super.visitMethod(access, name, descriptor, signature, exceptions);
+    }
+
+    public static void main(String[] args) throws Exception{
+        ClassReader cr = new ClassReader(SampleClass.class.getName());
+        ClassWriter cw = new ClassWriter(0);
+        cr.accept(new ClassVersionAdapter(new ClassPrinter(cw)), 0);
     }
 }

@@ -14,12 +14,16 @@ import static org.objectweb.asm.Opcodes.ASM6;
  */
 public class ClassPrinter extends ClassVisitor {
 
+    public ClassPrinter() {
+        super(ASM6);
+    }
+
     public ClassPrinter(int api) {
         super(api);
     }
 
-    public ClassPrinter(int api, ClassVisitor classVisitor) {
-        super(api, classVisitor);
+    public ClassPrinter(ClassVisitor classVisitor) {
+        super(ASM6, classVisitor);
     }
 
     @Override
@@ -68,7 +72,7 @@ public class ClassPrinter extends ClassVisitor {
 
     @Override
     public void visitInnerClass(String name, String outerName, String innerName, int access) {
-        System.out.printf("// visiInnerClass(%s %s %d %d)\n", name, outerName, innerName, access);
+        System.out.printf("// visiInnerClass(%s %s %s %d)\n", name, outerName, innerName, access);
         super.visitInnerClass(name, outerName, innerName, access);
     }
 
