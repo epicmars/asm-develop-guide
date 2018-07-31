@@ -90,7 +90,7 @@ public class ClassPrinter extends ClassVisitor {
 
     @Override
     public void visitEnd() {
-        System.out.printf("// visitEnd\n");
+        System.out.printf("// visitEnd\n\n\n");
         super.visitEnd();
     }
 

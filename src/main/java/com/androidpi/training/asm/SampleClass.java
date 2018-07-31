@@ -12,8 +12,12 @@ public class SampleClass extends SampleAbstractClass implements SampleInterface{
     }
 
     @Override
-    public void doThis() {
-
+    public void doThis(){
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            System.out.println("doThis is interrupted!");
+        }
     }
 
     @Override
